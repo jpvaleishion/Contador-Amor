@@ -3,49 +3,215 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Para el Amor de Mi Vida</title>
+    <title>Para el Amor de Mi Vida 💖</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
     <style>
+        /* ========== RESET Y BASE ========== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --color-amor: #e63946;
+            --color-amor-claro: #ff758c;
+            --color-amor-oscuro: #d32f2f;
+            --color-texto: #333;
+            --color-fondo: linear-gradient(135deg, #ffafbd, #ffc3a0);
+            --color-blanco: rgba(255, 255, 255, 0.95);
+            --sombra: 0 15px 35px rgba(0, 0, 0, 0.2);
+            --spotify-green: #1DB954;
         }
         
         body {
-            background: linear-gradient(135deg, #ffafbd, #ffc3a0);
+            font-family: 'Poppins', sans-serif;
+            background: var(--color-fondo);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
-            color: #333;
+            color: var(--color-texto);
+            transition: background 1.5s ease;
+            overflow-x: hidden;
         }
         
+        /* ========== ANIMACIONES ========== */
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+        
+        @keyframes bloom {
+            0% { transform: scale(0.8) rotate(-5deg); opacity: 0; }
+            100% { transform: scale(1) rotate(0); opacity: 1; }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4); }
+            50% { transform: scale(1.1); box-shadow: 0 0 0 10px rgba(255, 255, 255, 0); }
+        }
+        
+        @keyframes sparkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+        
+        @keyframes confettiFall {
+            0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        @keyframes glow {
+            0%, 100% { text-shadow: 0 0 10px rgba(230, 57, 70, 0.5); }
+            50% { text-shadow: 0 0 20px rgba(230, 57, 70, 0.8), 0 0 30px rgba(230, 57, 70, 0.6); }
+        }
+        
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0.7; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes musicNote {
+            0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.8; }
+            50% { transform: translateY(-15px) rotate(10deg); opacity: 1; }
+        }
+        
+        /* ========== CONTENEDOR PRINCIPAL ========== */
         .container {
-            max-width: 800px;
+            max-width: 900px;
             width: 100%;
-            background-color: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            background-color: var(--color-blanco);
+            border-radius: 25px;
+            box-shadow: var(--sombra);
             overflow: hidden;
             position: relative;
-            padding: 40px;
+            padding: 50px 40px;
+            animation: bloom 1.2s ease-out;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
         
+        /* ========== REPRODUCTOR SPOTIFY ========== */
+        .music-player {
+            margin-bottom: 40px;
+            text-align: center;
+            animation: slideIn 0.8s ease-out 0.2s both;
+        }
+        
+        .music-title {
+            font-size: 1.4rem;
+            color: var(--color-amor);
+            margin-bottom: 15px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .music-title i {
+            color: var(--spotify-green);
+            animation: musicNote 2s infinite;
+        }
+        
+        .spotify-player {
+            background: linear-gradient(45deg, rgba(29, 185, 84, 0.1), rgba(30, 215, 96, 0.05));
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            border: 2px solid rgba(29, 185, 84, 0.2);
+            transition: all 0.3s;
+        }
+        
+        .spotify-player:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+            border-color: rgba(29, 185, 84, 0.3);
+        }
+        
+        .spotify-iframe {
+            border-radius: 12px;
+            width: 100%;
+            height: 152px;
+            border: none;
+        }
+        
+        .music-note {
+            position: absolute;
+            font-size: 1.8rem;
+            opacity: 0.6;
+            z-index: 0;
+            animation: musicNote 3s infinite ease-in-out;
+            pointer-events: none;
+        }
+        
+        .note-1 { top: 15%; left: 8%; animation-delay: 0s; color: var(--spotify-green); }
+        .note-2 { top: 20%; right: 10%; animation-delay: 0.5s; color: #ff6b8b; }
+        .note-3 { bottom: 25%; left: 9%; animation-delay: 1s; color: var(--spotify-green); }
+        
+        /* ========== DECORACIONES ========== */
+        .floating-heart {
+            position: absolute;
+            font-size: 1.5rem;
+            opacity: 0.6;
+            z-index: 0;
+            animation: float 4s infinite ease-in-out;
+            pointer-events: none;
+        }
+        
+        .heart-1 { top: 8%; left: 6%; animation-delay: 0s; color: #ff6b8b; }
+        .heart-2 { top: 12%; right: 8%; animation-delay: 0.5s; color: #ff8e8e; }
+        .heart-3 { bottom: 18%; left: 7%; animation-delay: 1s; color: #ffafbd; }
+        .heart-4 { bottom: 12%; right: 9%; animation-delay: 1.5s; color: #ffc3a0; }
+        
+        .sparkle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #fff;
+            animation: sparkle 2s infinite;
+            pointer-events: none;
+        }
+        
+        /* ========== ENCABEZADO ========== */
         .header {
             text-align: center;
             margin-bottom: 40px;
             position: relative;
+            z-index: 1;
         }
         
         .header h1 {
-            color: #e63946;
-            font-size: 2.8rem;
-            margin-bottom: 10px;
+            color: var(--color-amor);
+            font-size: 3.2rem;
+            margin-bottom: 15px;
+            font-family: 'Dancing Script', cursive;
             position: relative;
             display: inline-block;
+            animation: glow 3s infinite alternate;
         }
         
         .header h1:after {
@@ -53,194 +219,395 @@
             position: absolute;
             width: 100%;
             height: 4px;
-            background: linear-gradient(to right, transparent, #e63946, transparent);
-            bottom: -10px;
+            background: linear-gradient(to right, transparent, var(--color-amor), transparent);
+            bottom: -15px;
             left: 0;
+            border-radius: 2px;
         }
         
         .heart-icon {
-            color: #e63946;
-            font-size: 1.8rem;
-            margin: 0 10px;
+            color: var(--color-amor);
+            font-size: 2.2rem;
+            margin: 0 15px;
             animation: heartbeat 1.5s infinite;
+            display: inline-block;
         }
         
-        @keyframes heartbeat {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-        
+        /* ========== MENSAJE ========== */
         .message {
-            font-size: 1.4rem;
-            line-height: 1.8;
+            font-size: 1.5rem;
+            line-height: 1.9;
             text-align: center;
             margin-bottom: 40px;
-            padding: 0 20px;
+            padding: 0 25px;
             color: #555;
+            position: relative;
+            z-index: 1;
+            animation: slideIn 1s ease-out;
         }
         
         .message p {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            position: relative;
         }
         
         .princess {
-            color: #e63946;
+            color: var(--color-amor);
             font-weight: bold;
             font-style: italic;
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.8rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
         }
         
         .new-beginning {
             display: inline-block;
-            background-color: #f8f9fa;
-            border: 2px dashed #e63946;
-            border-radius: 10px;
-            padding: 8px 15px;
-            margin-top: 10px;
-            font-size: 1rem;
-            color: #e63946;
+            background: linear-gradient(45deg, #f8f9fa, #e9ecef);
+            border: 2px dashed var(--color-amor);
+            border-radius: 12px;
+            padding: 12px 20px;
+            margin-top: 15px;
+            font-size: 1.1rem;
+            color: var(--color-amor);
             font-weight: 600;
+            animation: pulse 2s infinite;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
         }
         
+        .new-beginning:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* ========== CONTADOR ========== */
         .timer-container {
-            background: linear-gradient(to right, #ff758c, #ff7eb3);
-            border-radius: 15px;
-            padding: 30px;
+            background: linear-gradient(45deg, var(--color-amor-claro), #ff7eb3);
+            border-radius: 20px;
+            padding: 40px;
             text-align: center;
             color: white;
             margin-top: 30px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            animation: slideIn 1.2s ease-out 0.3s both;
+        }
+        
+        .timer-container:before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+            animation: float 20s infinite linear;
+            z-index: -1;
         }
         
         .timer-title {
-            font-size: 1.8rem;
-            margin-bottom: 30px;
-            font-weight: 600;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+            font-size: 2rem;
+            margin-bottom: 35px;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            letter-spacing: 1px;
+            animation: fadeIn 1s ease-out;
         }
         
         .sync-status {
-            background-color: rgba(255, 255, 255, 0.2);
-            border-radius: 8px;
-            padding: 8px 15px;
-            margin-bottom: 15px;
-            font-size: 0.9rem;
+            background-color: rgba(255, 255, 255, 0.25);
+            border-radius: 12px;
+            padding: 12px 20px;
+            margin-bottom: 25px;
+            font-size: 1rem;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 12px;
             justify-content: center;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: pulse 3s infinite;
         }
         
         .timer {
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 15px;
-            margin-bottom: 25px;
+            gap: 20px;
+            margin-bottom: 35px;
         }
         
         .time-unit {
-            background-color: rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
-            padding: 20px 15px;
-            min-width: 110px;
-            backdrop-filter: blur(5px);
+            background-color: rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            padding: 25px 20px;
+            min-width: 120px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .time-unit:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .time-unit:hover:before {
+            left: 100%;
+        }
+        
+        .time-unit:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
         }
         
         .time-value {
-            font-size: 2.8rem;
-            font-weight: 700;
-            margin-bottom: 5px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-            height: 50px;
+            font-size: 3.2rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+            height: 60px;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-family: 'Poppins', sans-serif;
+            letter-spacing: 2px;
         }
         
         .time-label {
-            font-size: 1rem;
+            font-size: 1.1rem;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
+            letter-spacing: 2px;
             font-weight: 600;
+            opacity: 0.9;
         }
         
         .highlight {
             background-color: rgba(255, 255, 255, 0.3);
             border: 2px solid white;
-            transform: scale(1.05);
+            transform: scale(1.1);
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.4);
+            animation: pulse 2s infinite !important;
         }
         
-        .signature {
-            text-align: right;
-            margin-top: 40px;
-            font-size: 1.5rem;
-            color: #e63946;
-            font-style: italic;
-            font-weight: 600;
-        }
-        
-        .footer {
-            text-align: center;
-            margin-top: 30px;
-            font-size: 0.9rem;
-            color: #888;
-        }
-        
-        .heart-decoration {
-            position: absolute;
-            color: rgba(230, 57, 70, 0.1);
-            font-size: 2rem;
-            z-index: 0;
-        }
-        
-        .heart-1 { top: 10%; left: 5%; }
-        .heart-2 { top: 15%; right: 7%; }
-        .heart-3 { bottom: 20%; left: 8%; }
-        .heart-4 { bottom: 15%; right: 10%; }
-        
-        .bloom {
-            animation: bloom 2s ease-out;
-        }
-        
-        @keyframes bloom {
-            0% { transform: scale(0.8); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-        
+        /* ========== BOTÓN REINICIAR ========== */
         .reset-btn {
-            background-color: rgba(255, 255, 255, 0.9);
-            color: #e63946;
+            background: linear-gradient(45deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.85));
+            color: var(--color-amor);
             border: none;
-            border-radius: 8px;
-            padding: 12px 25px;
-            font-size: 1.1rem;
+            border-radius: 12px;
+            padding: 15px 35px;
+            font-size: 1.2rem;
             cursor: pointer;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 12px;
             transition: all 0.3s;
-            font-weight: 600;
-            margin-top: 10px;
+            font-weight: 700;
+            margin-top: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .reset-btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(230, 57, 70, 0.1), transparent);
+            transition: left 0.5s;
+            z-index: -1;
         }
         
         .reset-btn:hover {
-            background-color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+            color: var(--color-amor-oscuro);
         }
         
-        @media (max-width: 768px) {
+        .reset-btn:hover:before {
+            left: 100%;
+        }
+        
+        .reset-btn:active {
+            transform: translateY(-2px);
+        }
+        
+        /* ========== FIRMA ========== */
+        .signature {
+            text-align: right;
+            margin-top: 50px;
+            font-size: 1.8rem;
+            color: var(--color-amor);
+            font-style: italic;
+            font-weight: 700;
+            font-family: 'Dancing Script', cursive;
+            position: relative;
+            z-index: 1;
+            animation: fadeIn 1.5s ease-out 0.5s both;
+        }
+        
+        .signature i {
+            margin-left: 10px;
+            animation: heartbeat 1.5s infinite;
+        }
+        
+        /* ========== PIE DE PÁGINA ========== */
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 0.95rem;
+            color: #777;
+            position: relative;
+            z-index: 1;
+            animation: fadeIn 2s ease-out;
+        }
+        
+        .footer-heart {
+            color: var(--color-amor);
+            animation: heartbeat 2s infinite;
+            display: inline-block;
+            margin: 0 5px;
+        }
+        
+        /* ========== MENSAJES ESPECIALES ========== */
+        .special-message {
+            animation: slideIn 0.8s ease-out;
+            margin-bottom: 25px;
+        }
+        
+        .message-content {
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+            padding: 20px 30px;
+            border-radius: 15px;
+            color: white;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.3rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .message-content:before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e, #ff6b6b);
+            z-index: -1;
+            filter: blur(20px);
+            opacity: 0.6;
+        }
+        
+        /* ========== BOTÓN SONIDO ========== */
+        .sound-btn {
+            position: fixed;
+            top: 25px;
+            right: 25px;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            color: var(--color-amor);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            transition: all 0.3s;
+            animation: bloom 1s ease-out 1s both;
+        }
+        
+        .sound-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            background: white;
+        }
+        
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 992px) {
             .container {
-                padding: 25px;
+                padding: 40px 30px;
             }
             
             .header h1 {
-                font-size: 2.2rem;
+                font-size: 2.8rem;
+            }
+            
+            .timer {
+                gap: 15px;
+            }
+            
+            .time-unit {
+                min-width: 110px;
+                padding: 20px 15px;
+            }
+            
+            .time-value {
+                font-size: 2.8rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            
+            .container {
+                padding: 35px 25px;
+                border-radius: 20px;
+            }
+            
+            .header h1 {
+                font-size: 2.4rem;
+            }
+            
+            .heart-icon {
+                font-size: 1.8rem;
+                margin: 0 10px;
             }
             
             .message {
+                font-size: 1.3rem;
+                padding: 0 15px;
+            }
+            
+            .music-player {
+                margin-bottom: 30px;
+            }
+            
+            .music-title {
                 font-size: 1.2rem;
-                padding: 0;
+            }
+            
+            .timer-container {
+                padding: 30px 20px;
+            }
+            
+            .timer-title {
+                font-size: 1.7rem;
             }
             
             .timer {
@@ -248,25 +615,100 @@
             }
             
             .time-unit {
-                min-width: 95px;
+                min-width: 100px;
+                padding: 18px 12px;
+            }
+            
+            .time-value {
+                font-size: 2.4rem;
+                height: 50px;
+            }
+            
+            .time-label {
+                font-size: 1rem;
+            }
+            
+            .reset-btn {
+                padding: 12px 25px;
+                font-size: 1.1rem;
+            }
+            
+            .sound-btn {
+                top: 15px;
+                right: 15px;
+                width: 45px;
+                height: 45px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .message {
+                font-size: 1.2rem;
+            }
+            
+            .music-title {
+                font-size: 1.1rem;
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .spotify-iframe {
+                height: 152px;
+            }
+            
+            .timer {
+                gap: 8px;
+            }
+            
+            .time-unit {
+                min-width: 85px;
                 padding: 15px 10px;
             }
             
             .time-value {
-                font-size: 2.2rem;
-                height: 40px;
-            }
-            
-            .highlight {
-                transform: scale(1.03);
+                font-size: 2rem;
+                height: 45px;
             }
             
             .timer-title {
-                font-size: 1.6rem;
+                font-size: 1.5rem;
+            }
+            
+            .sync-status {
+                font-size: 0.9rem;
+                padding: 10px 15px;
+            }
+            
+            .new-beginning {
+                font-size: 1rem;
+                padding: 10px 15px;
+            }
+            
+            .signature {
+                font-size: 1.5rem;
+            }
+            
+            .sound-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1.1rem;
             }
         }
         
         @media (max-width: 480px) {
+            .time-unit {
+                min-width: 75px;
+                padding: 12px 8px;
+            }
+            
+            .time-value {
+                font-size: 1.8rem;
+            }
+            
             .header h1 {
                 font-size: 1.8rem;
             }
@@ -275,45 +717,32 @@
                 font-size: 1.1rem;
             }
             
-            .time-unit {
-                min-width: 80px;
-                padding: 12px 8px;
-            }
-            
-            .time-value {
-                font-size: 1.8rem;
-                height: 35px;
-            }
-            
-            .timer-title {
-                font-size: 1.4rem;
-                margin-bottom: 20px;
-            }
-            
-            .new-beginning {
-                font-size: 0.9rem;
-                padding: 6px 10px;
-            }
-            
-            .time-label {
-                font-size: 0.9rem;
-                letter-spacing: 1px;
-            }
-            
-            .reset-btn {
-                padding: 10px 20px;
-                font-size: 1rem;
+            .spotify-iframe {
+                height: 152px;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Botón de sonido -->
+    <button class="sound-btn" id="soundBtn" title="Activar sonidos">
+        <i class="fas fa-volume-mute"></i>
+    </button>
+    
+    <!-- Notas musicales decorativas -->
+    <div class="music-note note-1"><i class="fas fa-music"></i></div>
+    <div class="music-note note-2"><i class="fas fa-music"></i></div>
+    <div class="music-note note-3"><i class="fas fa-music"></i></div>
+    
+    <!-- Corazones flotantes -->
+    <div class="floating-heart heart-1"><i class="fas fa-heart"></i></div>
+    <div class="floating-heart heart-2"><i class="fas fa-heart"></i></div>
+    <div class="floating-heart heart-3"><i class="fas fa-heart"></i></div>
+    <div class="floating-heart heart-4"><i class="fas fa-heart"></i></div>
+    
+    <!-- Contenedor principal -->
     <div class="container">
-        <div class="heart-decoration heart-1"><i class="fas fa-heart"></i></div>
-        <div class="heart-decoration heart-2"><i class="fas fa-heart"></i></div>
-        <div class="heart-decoration heart-3"><i class="fas fa-heart"></i></div>
-        <div class="heart-decoration heart-4"><i class="fas fa-heart"></i></div>
-        
+        <!-- Encabezado -->
         <div class="header">
             <h1>
                 <i class="fas fa-heart heart-icon"></i>
@@ -322,23 +751,47 @@
             </h1>
         </div>
         
+        <!-- Reproductor de Spotify -->
+        <div class="music-player">
+            <div class="music-title">
+                <i class="fab fa-spotify"></i>
+                <span>Nuestra canción especial - La escucho y pienso en ti</span>
+                <i class="fas fa-heart" style="color: var(--color-amor);"></i>
+            </div>
+            <div class="spotify-player">
+                <iframe class="spotify-iframe" 
+                        src="https://open.spotify.com/embed/track/0aaTGNeISpwMnq7jr0Xtf8?utm_source=generator&theme=0" 
+                        allowfullscreen="" 
+                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                        loading="lazy">
+                </iframe>
+            </div>
+        </div>
+        
+        <!-- Mensaje -->
         <div class="message">
             <p>Para el amor de mi vida, quiero que sepas, que todo este tiempo me la he pasado bien contigo, quiero que sigamos juntos hasta el último de nuestros días.</p>
             <p>Mi vida a tu lado ha sido mejor, tú eres la mejor <span class="princess">mi princesa</span>.</p>
-            <div class="new-beginning bloom">
-                <i class="fas fa-seedling" style="margin-right: 8px;"></i>
+            <div class="new-beginning">
+                <i class="fas fa-seedling" style="margin-right: 10px;"></i>
                 Iniciando de nuevo
             </div>
         </div>
         
+        <!-- Contenedor del contador -->
         <div class="timer-container">
+            <!-- Mensajes especiales aparecen aquí -->
+            <div id="specialMessages"></div>
+            
             <div class="timer-title">Llevamos juntos en este nuevo comienzo:</div>
             
+            <!-- Estado de sincronización -->
             <div class="sync-status" id="syncStatus">
                 <i class="fas fa-sync-alt"></i>
                 <span>Conectando con JSONBin...</span>
             </div>
             
+            <!-- Contador -->
             <div class="timer">
                 <div class="time-unit" id="years-unit">
                     <div class="time-value" id="years">0</div>
@@ -366,198 +819,214 @@
                 </div>
             </div>
             
+            <!-- Botón reiniciar -->
             <button class="reset-btn" id="resetBtn">
                 <i class="fas fa-redo"></i>
                 Reiniciar contador
             </button>
         </div>
         
+        <!-- Firma -->
         <div class="signature">
-            — Te Amo <i class="fas fa-heart" style="color: #e63946; margin-left: 5px;"></i>
+            — Te Amo <i class="fas fa-heart"></i>
         </div>
         
+        <!-- Pie de página -->
         <div class="footer">
+            <span class="footer-heart">❤️</span>
             Sincronizado con JSONBin.io | Funciona en todos los dispositivos
+            <span class="footer-heart">❤️</span>
         </div>
     </div>
 
     <script>
         // ==============================================
-        // TUS CREDENCIALES JSONBIN.IO (¡YA CONFIGURADAS!)
+        // CONFIGURACIÓN JSONBIN.IO
         // ==============================================
-        const JSONBIN_BIN_ID = '6989f89dae596e708f1dc562'; // Tu Bin ID
-        const JSONBIN_API_KEY = '$2a$10$ZOrmLvQsR5eQwxIKCh/1eenfsFCKIKpenMsNwEHdAzpUHZQBx8bSW'; // Tu API Key
-        // ==============================================
+        const JSONBIN_BIN_ID = '6989f89dae596e708f1dc562';
+        const JSONBIN_API_KEY = '$2a$10$ZOrmLvQsR5eQwxIKCh/1eenfsFCKIKpenMsNwEHdAzpUHZQBx8bSW';
         
-        // URLs para JSONBin
         const JSONBIN_URL = `https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}`;
         const JSONBIN_LATEST_URL = `https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}/latest`;
         
+        // ==============================================
+        // VARIABLES GLOBALES
+        // ==============================================
         let startDate = null;
         let isOnline = true;
+        let soundEnabled = false;
+        let specialMessagesShown = [];
+        let spotifyAutoPlay = false;
         
-        // Función para actualizar estado de conexión
-        function updateSyncStatus(status) {
-            const syncStatus = document.getElementById('syncStatus');
-            const icon = syncStatus.querySelector('i');
-            const text = syncStatus.querySelector('span');
+        // ==============================================
+        // INICIALIZACIÓN
+        // ==============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🚀 Contador de Amor - Iniciando...');
             
-            if (status === 'connected') {
-                syncStatus.style.backgroundColor = 'rgba(144, 238, 144, 0.3)'; // Verde claro
-                icon.className = 'fas fa-cloud';
-                text.textContent = '✅ Sincronizado con JSONBin';
-            } else if (status === 'syncing') {
-                syncStatus.style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
-                icon.className = 'fas fa-sync-alt fa-spin';
-                text.textContent = '⏳ Sincronizando...';
-            } else if (status === 'error') {
-                syncStatus.style.backgroundColor = 'rgba(255, 200, 100, 0.3)';
-                icon.className = 'fas fa-exclamation-triangle';
-                text.textContent = '⚠️ Error de conexión - Modo local';
-            } else if (status === 'offline') {
-                syncStatus.style.backgroundColor = 'rgba(255, 220, 100, 0.3)';
-                icon.className = 'fas fa-wifi-slash';
-                text.textContent = '📴 Sin conexión - Modo local';
+            // Crear chispas decorativas
+            createSparkles();
+            
+            // Crear corazones flotantes continuos
+            startFloatingHearts();
+            
+            // Configurar botón de sonido
+            setupSoundButton();
+            
+            // Configurar fondo según hora
+            updateBackgroundByTime();
+            setInterval(updateBackgroundByTime, 600000); // Cada 10 minutos
+            
+            // Cargar fecha inicial
+            loadStartDate();
+            
+            // Configurar eventos
+            document.getElementById('resetBtn').addEventListener('click', resetTimer);
+            
+            // Detectar conexión
+            window.addEventListener('online', handleOnline);
+            window.addEventListener('offline', handleOffline);
+            
+            // Iniciar animaciones
+            startAnimations();
+            
+            // Configurar Spotify
+            setupSpotify();
+        });
+        
+        // ==============================================
+        // SPOTIFY INTEGRATION
+        // ==============================================
+        function setupSpotify() {
+            // Crear notas musicales adicionales
+            createMusicNotes();
+            
+            // Intentar autoplay después de 3 segundos (si el usuario interactúa)
+            setTimeout(() => {
+                if (soundEnabled) {
+                    enableSpotifyAutoplay();
+                }
+            }, 3000);
+        }
+        
+        function createMusicNotes() {
+            // Añadir más notas musicales dinámicamente
+            setInterval(() => {
+                if (Math.random() > 0.8) {
+                    createFloatingMusicNote();
+                }
+            }, 5000);
+        }
+        
+        function createFloatingMusicNote() {
+            const note = document.createElement('div');
+            note.innerHTML = '<i class="fas fa-music"></i>';
+            note.style.position = 'fixed';
+            note.style.fontSize = Math.random() * 20 + 15 + 'px';
+            note.style.left = Math.random() * 100 + 'vw';
+            note.style.top = '100vh';
+            note.style.opacity = '0.5';
+            note.style.zIndex = '9996';
+            note.style.color = Math.random() > 0.5 ? 'var(--spotify-green)' : 'var(--color-amor)';
+            note.style.pointerEvents = 'none';
+            note.style.animation = `floatUp ${Math.random() * 6 + 4}s linear forwards`;
+            
+            document.body.appendChild(note);
+            
+            setTimeout(() => note.remove(), 7000);
+        }
+        
+        function enableSpotifyAutoplay() {
+            // Nota: Spotify no permite autoplay automático por políticas de navegador
+            // El usuario debe hacer clic manualmente en play
+            console.log('🎵 Spotify listo - Haz clic en play para escuchar');
+            
+            // Podemos mostrar un mensaje suave
+            if (!spotifyAutoPlay) {
+                setTimeout(() => {
+                    const musicTitle = document.querySelector('.music-title');
+                    const originalText = musicTitle.innerHTML;
+                    
+                    // Añadir instrucción sutil
+                    const instruction = document.createElement('div');
+                    instruction.style.fontSize = '0.8rem';
+                    instruction.style.marginTop = '5px';
+                    instruction.style.opacity = '0.7';
+                    instruction.style.fontStyle = 'italic';
+                    instruction.innerHTML = '(Haz clic en play para escuchar nuestra canción)';
+                    
+                    musicTitle.appendChild(instruction);
+                    
+                    // Remover después de 10 segundos
+                    setTimeout(() => {
+                        if (musicTitle.contains(instruction)) {
+                            musicTitle.removeChild(instruction);
+                        }
+                    }, 10000);
+                    
+                    spotifyAutoPlay = true;
+                }, 2000);
             }
         }
         
-        // Función para obtener fecha desde JSONBin
-        async function getDateFromJsonBin() {
+        // ==============================================
+        // FUNCIONES PRINCIPALES
+        // ==============================================
+        async function loadStartDate() {
             updateSyncStatus('syncing');
             
             try {
-                console.log('Obteniendo fecha de JSONBin...');
-                const response = await fetch(JSONBIN_LATEST_URL, {
-                    headers: {
-                        'X-Master-Key': JSONBIN_API_KEY
-                    }
-                });
+                const jsonBinDate = await getDateFromJsonBin();
                 
-                if (!response.ok) {
-                    throw new Error(`Error HTTP: ${response.status}`);
-                }
-                
-                const data = await response.json();
-                console.log('Datos recibidos de JSONBin:', data);
-                
-                if (data.record && data.record.startDate) {
-                    updateSyncStatus('connected');
-                    return new Date(data.record.startDate);
+                if (jsonBinDate) {
+                    startDate = jsonBinDate;
+                    console.log('✅ Fecha cargada desde JSONBin:', startDate.toLocaleString());
                 } else {
-                    throw new Error('No se encontró startDate en los datos');
+                    await loadFromLocalStorage();
                 }
+                
+                updateSyncStatus('connected');
+                startTimer();
+                startAutoSync();
+                
             } catch (error) {
-                console.error('Error al obtener fecha de JSONBin:', error);
+                console.error('❌ Error cargando fecha:', error);
                 updateSyncStatus('error');
-                return null;
+                await loadFromLocalStorage();
+                startTimer();
             }
         }
         
-        // Función para guardar fecha en JSONBin
-        async function saveDateToJsonBin(date) {
-            try {
-                console.log('Guardando fecha en JSONBin:', date);
-                const response = await fetch(JSONBIN_URL, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-Master-Key': JSONBIN_API_KEY,
-                        'X-Bin-Versioning': 'false'
-                    },
-                    body: JSON.stringify({
-                        startDate: date.toISOString(),
-                        lastUpdated: new Date().toISOString(),
-                        message: "Contador de amor sincronizado"
-                    })
-                });
-                
-                if (!response.ok) {
-                    throw new Error(`Error HTTP: ${response.status}`);
-                }
-                
-                const result = await response.json();
-                console.log('Fecha guardada exitosamente:', result);
-                return true;
-            } catch (error) {
-                console.error('Error al guardar fecha en JSONBin:', error);
-                return false;
-            }
-        }
-        
-        // Función para cargar la fecha inicial
-        async function loadStartDate() {
-            console.log('Cargando fecha inicial...');
+        async function loadFromLocalStorage() {
+            const localDate = localStorage.getItem('amor_fecha_inicio');
             
-            // Primero intentar desde JSONBin
-            const jsonBinDate = await getDateFromJsonBin();
-            
-            if (jsonBinDate) {
-                startDate = jsonBinDate;
-                console.log('✅ Fecha cargada desde JSONBin:', startDate);
-                console.log('Fecha en JSONBin:', startDate.toLocaleString());
+            if (localDate) {
+                startDate = new Date(localDate);
+                console.log('📁 Fecha cargada desde localStorage:', startDate.toLocaleString());
             } else {
-                console.log('❌ Falló JSONBin, intentando localStorage...');
+                startDate = new Date();
+                startDate.setMonth(startDate.getMonth() - 1);
+                localStorage.setItem('amor_fecha_inicio', startDate.toISOString());
+                console.log('🆕 Nueva fecha creada (hace 1 mes):', startDate.toLocaleString());
                 
-                // Si falla JSONBin, intentar localStorage
-                const localDate = localStorage.getItem('amor_fecha_inicio');
-                
-                if (localDate) {
-                    startDate = new Date(localDate);
-                    console.log('✅ Fecha cargada desde localStorage:', startDate);
-                    updateSyncStatus('error');
-                } else {
-                    // Si no hay nada, crear nueva fecha (hace 1 mes)
-                    startDate = new Date();
-                    startDate.setMonth(startDate.getMonth() - 1);
-                    
-                    console.log('🆕 Nueva fecha creada (hace 1 mes):', startDate);
-                    
-                    // Guardar en localStorage como respaldo
-                    localStorage.setItem('amor_fecha_inicio', startDate.toISOString());
-                    updateSyncStatus('error');
-                    
-                    // Intentar guardar en JSONBin
-                    console.log('Intentando guardar nueva fecha en JSONBin...');
-                    const saved = await saveDateToJsonBin(startDate);
-                    if (saved) {
-                        updateSyncStatus('connected');
-                        console.log('✅ Nueva fecha guardada en JSONBin');
-                    } else {
-                        console.log('❌ No se pudo guardar en JSONBin');
-                    }
-                }
+                // Intentar guardar en JSONBin
+                const saved = await saveDateToJsonBin(startDate);
+                if (saved) updateSyncStatus('connected');
             }
-            
-            // Iniciar el contador
+        }
+        
+        function startTimer() {
             updateTimer();
             setInterval(updateTimer, 1000);
-            
-            // Sincronizar cada 30 segundos
-            setInterval(syncWithJsonBin, 30000);
         }
         
-        // Función para sincronizar con JSONBin
-        async function syncWithJsonBin() {
-            if (!isOnline) {
-                console.log('📴 Modo offline, no sincronizando');
-                return;
-            }
-            
-            try {
-                console.log('🔄 Sincronizando con JSONBin...');
-                const jsonBinDate = await getDateFromJsonBin();
-                if (jsonBinDate && startDate && jsonBinDate.getTime() !== startDate.getTime()) {
-                    startDate = jsonBinDate;
-                    localStorage.setItem('amor_fecha_inicio', startDate.toISOString());
-                    console.log('✅ Fecha sincronizada desde JSONBin:', startDate);
-                    updateSyncStatus('connected');
-                }
-            } catch (error) {
-                console.log('❌ Error en sincronización:', error);
-            }
+        function startAutoSync() {
+            setInterval(syncWithJsonBin, 30000); // Cada 30 segundos
         }
         
-        // Función para actualizar el contador
+        // ==============================================
+        // FUNCIÓN PRINCIPAL DEL CONTADOR
+        // ==============================================
         function updateTimer() {
             if (!startDate) return;
             
@@ -574,6 +1043,7 @@
             const months = Math.floor(remainingDaysAfterYears / 30);
             const remainingDays = remainingDaysAfterYears % 30;
             
+            // Actualizar display
             document.getElementById('years').textContent = years;
             document.getElementById('months').textContent = months;
             document.getElementById('days').textContent = remainingDays;
@@ -581,105 +1051,508 @@
             document.getElementById('minutes').textContent = minutes < 10 ? '0' + minutes : minutes;
             document.getElementById('seconds').textContent = seconds < 10 ? '0' + seconds : seconds;
             
+            // Efectos visuales
+            updateVisualEffects(years, months, remainingDays, hours, minutes, seconds);
+            
+            // Mensajes especiales
+            checkSpecialMoments(days, hours, minutes, seconds);
+            
+            // Confeti en hitos importantes
+            checkForConfetti(days, hours, minutes, seconds);
+            
+            // Efectos musicales especiales
+            checkMusicEffects(days, hours, minutes, seconds);
+        }
+        
+        // ==============================================
+        // EFECTOS VISUALES
+        // ==============================================
+        function updateVisualEffects(years, months, days, hours, minutes, seconds) {
             const yearsUnit = document.getElementById('years-unit');
+            const monthsUnit = document.getElementById('months-unit');
+            
+            // Resaltar años si es 0
             if (years === 0) {
                 yearsUnit.classList.add('highlight');
             } else {
                 yearsUnit.classList.remove('highlight');
             }
             
-            const monthsUnit = document.getElementById('months-unit');
-            if (months === 1 && remainingDays === 0) {
+            // Resaltar meses si es 1 mes exacto
+            if (months === 1 && days === 0 && hours === 0 && minutes === 0 && seconds < 5) {
                 monthsUnit.classList.add('highlight');
             } else {
                 monthsUnit.classList.remove('highlight');
             }
-        }
-        
-        // Función para reiniciar el contador
-        async function resetTimer() {
-            if (confirm('¿Estás seguro de querer reiniciar el contador? Esto afectará a todos los dispositivos.')) {
-                const newStartDate = new Date();
-                newStartDate.setMonth(newStartDate.getMonth() - 1);
-                
-                console.log('🔄 Reiniciando contador a:', newStartDate);
-                
-                // Guardar en localStorage primero
-                localStorage.setItem('amor_fecha_inicio', newStartDate.toISOString());
-                
-                // Intentar guardar en JSONBin
-                if (isOnline) {
-                    console.log('Intentando guardar reinicio en JSONBin...');
-                    const saved = await saveDateToJsonBin(newStartDate);
-                    if (saved) {
-                        startDate = newStartDate;
-                        updateTimer();
-                        alert('✅ ¡Contador reiniciado en TODOS los dispositivos!');
-                        console.log('✅ Reinicio exitoso en JSONBin');
-                        return;
-                    }
-                }
-                
-                // Si JSONBin falla, solo actualizar localmente
-                startDate = newStartDate;
-                updateTimer();
-                alert('⚠️ ¡Contador reiniciado! (solo en este dispositivo por ahora)');
-                console.log('⚠️ Reinicio solo local (JSONBin falló)');
+            
+            // Efecto de pulso en segundos
+            if (seconds === 0) {
+                document.getElementById('seconds').parentElement.classList.add('highlight');
+                setTimeout(() => {
+                    document.getElementById('seconds').parentElement.classList.remove('highlight');
+                }, 500);
             }
         }
         
-        // Configurar eventos
-        document.getElementById('resetBtn').addEventListener('click', resetTimer);
+        function updateBackgroundByTime() {
+            const hour = new Date().getHours();
+            const body = document.body;
+            
+            if (hour >= 5 && hour < 12) {
+                body.style.background = 'linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)';
+            } else if (hour >= 12 && hour < 17) {
+                body.style.background = 'linear-gradient(135deg, #ffafbd 0%, #ffc3a0 100%)';
+            } else if (hour >= 17 && hour < 20) {
+                body.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+            } else {
+                body.style.background = 'linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%)';
+            }
+        }
         
-        // Detectar cambios en conexión
-        window.addEventListener('online', () => {
+        // ==============================================
+        // EFECTOS MUSICALES ESPECIALES
+        // ==============================================
+        function checkMusicEffects(days, hours, minutes, seconds) {
+            // Crear notas musicales especiales en momentos específicos
+            if (seconds === 0 && minutes % 15 === 0) {
+                createSpecialMusicNote();
+            }
+            
+            // Efecto especial cada hora exacta
+            if (minutes === 0 && seconds === 0) {
+                createHourlyMusicEffect();
+            }
+        }
+        
+        function createSpecialMusicNote() {
+            const note = document.createElement('div');
+            note.innerHTML = '<i class="fas fa-music"></i>';
+            note.style.position = 'fixed';
+            note.style.fontSize = '2.5rem';
+            note.style.left = '50%';
+            note.style.top = '50%';
+            note.style.opacity = '0';
+            note.style.zIndex = '9999';
+            note.style.color = 'var(--spotify-green)';
+            note.style.pointerEvents = 'none';
+            note.style.transform = 'translate(-50%, -50%)';
+            note.style.animation = 'fadeIn 0.5s ease-out, musicNote 1s ease-in-out 0.5s';
+            
+            document.body.appendChild(note);
+            
+            setTimeout(() => {
+                note.style.opacity = '0';
+                note.style.transition = 'opacity 0.5s';
+                setTimeout(() => note.remove(), 500);
+            }, 1500);
+        }
+        
+        function createHourlyMusicEffect() {
+            // Crear múltiples notas musicales
+            for (let i = 0; i < 5; i++) {
+                setTimeout(() => {
+                    createFloatingMusicNote();
+                }, i * 200);
+            }
+        }
+        
+        // ==============================================
+        // MENSAJES ESPECIALES
+        // ==============================================
+        function checkSpecialMoments(days, hours, minutes, seconds) {
+            const specialMoments = [
+                { day: 7, message: "🎉 ¡Una semana juntos! 🎉", emoji: "🎊" },
+                { day: 14, message: "💕 ¡Dos semanas de puro amor! 💕", emoji: "💞" },
+                { day: 30, message: "🎂 ¡FELIZ PRIMER MES! 🎂", emoji: "🎁" },
+                { day: 60, message: "✨ ¡Dos meses de felicidad! ✨", emoji: "💫" },
+                { day: 100, message: "💯 ¡100 días increíbles! 💯", emoji: "🏆" },
+                { day: 365, message: "🥳 ¡FELIZ PRIMER AÑO! 🥳", emoji: "🎆" }
+            ];
+            
+            specialMoments.forEach(moment => {
+                if (days === moment.day && hours === 0 && minutes === 0 && seconds < 10) {
+                    if (!specialMessagesShown.includes(moment.day)) {
+                        showSpecialMessage(moment.message, moment.emoji);
+                        specialMessagesShown.push(moment.day);
+                        
+                        // Guardar en localStorage para no mostrar de nuevo
+                        const shownMessages = JSON.parse(localStorage.getItem('shownMessages') || '[]');
+                        if (!shownMessages.includes(moment.day)) {
+                            shownMessages.push(moment.day);
+                            localStorage.setItem('shownMessages', JSON.stringify(shownMessages));
+                        }
+                    }
+                }
+            });
+        }
+        
+        function showSpecialMessage(message, emoji) {
+            const messagesContainer = document.getElementById('specialMessages');
+            
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'special-message';
+            messageDiv.innerHTML = `
+                <div class="message-content">
+                    ${emoji} ${message} ${emoji}
+                </div>
+            `;
+            
+            messagesContainer.appendChild(messageDiv);
+            
+            // Reproducir sonido si está activado
+            if (soundEnabled) {
+                playCelebrationSound();
+            }
+            
+            // Efectos visuales adicionales
+            launchConfetti();
+            createSpecialMusicNote();
+            
+            // Remover después de 15 segundos
+            setTimeout(() => {
+                messageDiv.style.opacity = '0';
+                messageDiv.style.transition = 'opacity 1s';
+                setTimeout(() => messageDiv.remove(), 1000);
+            }, 15000);
+        }
+        
+        // ==============================================
+        // CONFETI Y EFECTOS ESPECIALES
+        // ==============================================
+        function checkForConfetti(days, hours, minutes, seconds) {
+            // Confeti al cumplir 1 mes exacto
+            if (days === 30 && hours === 0 && minutes === 0 && seconds < 10) {
+                launchConfetti();
+            }
+            
+            // Confeti cada 100 días
+            if (days % 100 === 0 && hours === 0 && minutes === 0 && seconds < 10) {
+                launchConfetti();
+            }
+        }
+        
+        function launchConfetti() {
+            const confettiContainer = document.createElement('div');
+            confettiContainer.style.position = 'fixed';
+            confettiContainer.style.top = '0';
+            confettiContainer.style.left = '0';
+            confettiContainer.style.width = '100%';
+            confettiContainer.style.height = '100%';
+            confettiContainer.style.pointerEvents = 'none';
+            confettiContainer.style.zIndex = '9998';
+            
+            const emojis = ['💖', '💕', '💘', '💝', '💗', '😍', '🥰', '❤️', '💌', '🎉', '✨', '🌟', '🎵', '🎶'];
+            
+            for (let i = 0; i < 75; i++) {
+                const confetti = document.createElement('div');
+                confetti.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                confetti.style.position = 'absolute';
+                confetti.style.fontSize = Math.random() * 25 + 20 + 'px';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.top = '-50px';
+                confetti.style.animation = `confettiFall ${Math.random() * 4 + 3}s linear forwards`;
+                confetti.style.animationDelay = Math.random() * 2 + 's';
+                
+                confettiContainer.appendChild(confetti);
+            }
+            
+            document.body.appendChild(confettiContainer);
+            
+            setTimeout(() => {
+                document.body.removeChild(confettiContainer);
+            }, 6000);
+        }
+        
+        // ==============================================
+        // ANIMACIONES DECORATIVAS
+        // ==============================================
+        function createSparkles() {
+            for (let i = 0; i < 20; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.style.left = Math.random() * 100 + 'vw';
+                sparkle.style.top = Math.random() * 100 + 'vh';
+                sparkle.style.animationDelay = Math.random() * 2 + 's';
+                document.body.appendChild(sparkle);
+            }
+        }
+        
+        function startFloatingHearts() {
+            setInterval(() => {
+                if (Math.random() > 0.7) { // 30% de probabilidad
+                    createFloatingHeart();
+                }
+            }, 3000);
+        }
+        
+        function createFloatingHeart() {
+            const heart = document.createElement('div');
+            heart.innerHTML = '💖';
+            heart.style.position = 'fixed';
+            heart.style.fontSize = Math.random() * 25 + 15 + 'px';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.top = '100vh';
+            heart.style.opacity = '0.6';
+            heart.style.zIndex = '9997';
+            heart.style.pointerEvents = 'none';
+            heart.style.animation = `floatUp ${Math.random() * 8 + 6}s linear forwards`;
+            
+            document.body.appendChild(heart);
+            
+            setTimeout(() => heart.remove(), 8000);
+        }
+        
+        function startAnimations() {
+            // Animación inicial de entrada
+            const elements = document.querySelectorAll('.header, .music-player, .message, .timer-container, .signature');
+            elements.forEach((el, index) => {
+                el.style.animationDelay = (index * 0.2) + 's';
+            });
+        }
+        
+        // ==============================================
+        // SONIDOS
+        // ==============================================
+        function setupSoundButton() {
+            const soundBtn = document.getElementById('soundBtn');
+            
+            // Cargar estado del sonido
+            soundEnabled = localStorage.getItem('soundEnabled') === 'true';
+            updateSoundButton(soundBtn);
+            
+            soundBtn.addEventListener('click', () => {
+                soundEnabled = !soundEnabled;
+                localStorage.setItem('soundEnabled', soundEnabled);
+                updateSoundButton(soundBtn);
+                
+                if (soundEnabled) {
+                    playHeartbeatSound();
+                    enableSpotifyAutoplay();
+                }
+            });
+        }
+        
+        function updateSoundButton(btn) {
+            if (soundEnabled) {
+                btn.innerHTML = '<i class="fas fa-volume-up"></i>';
+                btn.title = 'Desactivar sonidos';
+            } else {
+                btn.innerHTML = '<i class="fas fa-volume-mute"></i>';
+                btn.title = 'Activar sonidos';
+            }
+        }
+        
+        function playHeartbeatSound() {
+            if (!soundEnabled) return;
+            
+            try {
+                // Crear sonido de latido simple
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                oscillator.frequency.value = 120;
+                oscillator.type = 'sine';
+                
+                gainNode.gain.setValueAtTime(0.05, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+                
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + 0.3);
+                
+            } catch (e) {
+                console.log('🔇 Sonidos no disponibles');
+            }
+        }
+        
+        function playCelebrationSound() {
+            if (!soundEnabled) return;
+            
+            try {
+                // Sonido de celebración simple
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                
+                for (let i = 0; i < 5; i++) {
+                    setTimeout(() => {
+                        const oscillator = audioContext.createOscillator();
+                        const gainNode = audioContext.createGain();
+                        
+                        oscillator.connect(gainNode);
+                        gainNode.connect(audioContext.destination);
+                        
+                        oscillator.frequency.value = 440 + (i * 100);
+                        oscillator.type = 'sine';
+                        
+                        gainNode.gain.setValueAtTime(0.05, audioContext.currentTime);
+                        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+                        
+                        oscillator.start(audioContext.currentTime);
+                        oscillator.stop(audioContext.currentTime + 0.1);
+                    }, i * 100);
+                }
+            } catch (e) {
+                console.log('🔇 Sonidos no disponibles');
+            }
+        }
+        
+        // ==============================================
+        // JSONBIN.IO FUNCTIONS
+        // ==============================================
+        async function getDateFromJsonBin() {
+            try {
+                const response = await fetch(JSONBIN_LATEST_URL, {
+                    headers: { 'X-Master-Key': JSONBIN_API_KEY }
+                });
+                
+                if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
+                
+                const data = await response.json();
+                return data.record?.startDate ? new Date(data.record.startDate) : null;
+                
+            } catch (error) {
+                console.error('Error JSONBin:', error);
+                return null;
+            }
+        }
+        
+        async function saveDateToJsonBin(date) {
+            try {
+                const response = await fetch(JSONBIN_URL, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Master-Key': JSONBIN_API_KEY
+                    },
+                    body: JSON.stringify({
+                        startDate: date.toISOString(),
+                        lastUpdated: new Date().toISOString()
+                    })
+                });
+                
+                return response.ok;
+            } catch (error) {
+                console.error('Error guardando JSONBin:', error);
+                return false;
+            }
+        }
+        
+        async function syncWithJsonBin() {
+            if (!isOnline) return;
+            
+            try {
+                const jsonBinDate = await getDateFromJsonBin();
+                if (jsonBinDate && startDate && jsonBinDate.getTime() !== startDate.getTime()) {
+                    startDate = jsonBinDate;
+                    localStorage.setItem('amor_fecha_inicio', startDate.toISOString());
+                    updateSyncStatus('connected');
+                }
+            } catch (error) {
+                console.log('Error sincronización:', error);
+            }
+        }
+        
+        // ==============================================
+        // MANEJO DE CONEXIÓN
+        // ==============================================
+        function handleOnline() {
             isOnline = true;
             console.log('🌐 Conexión restaurada');
             updateSyncStatus('connected');
             syncWithJsonBin();
-        });
+        }
         
-        window.addEventListener('offline', () => {
+        function handleOffline() {
             isOnline = false;
             console.log('📴 Sin conexión');
             updateSyncStatus('offline');
-        });
+        }
         
-        // Inicializar cuando cargue la página
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('🚀 Página cargada, iniciando contador...');
+        function updateSyncStatus(status) {
+            const syncStatus = document.getElementById('syncStatus');
+            const icon = syncStatus.querySelector('i');
+            const text = syncStatus.querySelector('span');
             
-            // Verificar credenciales
-            if (!JSONBIN_BIN_ID || !JSONBIN_API_KEY || 
-                JSONBIN_BIN_ID.includes('PEGA_TU') || 
-                JSONBIN_API_KEY.includes('PEGA_TU')) {
-                alert('⚠️ Configura primero tus credenciales JSONBin en el código');
-                updateSyncStatus('error');
+            switch(status) {
+                case 'connected':
+                    syncStatus.style.background = 'rgba(144, 238, 144, 0.3)';
+                    icon.className = 'fas fa-cloud';
+                    text.textContent = '✅ Sincronizado con JSONBin';
+                    break;
+                case 'syncing':
+                    syncStatus.style.background = 'rgba(255, 255, 255, 0.25)';
+                    icon.className = 'fas fa-sync-alt fa-spin';
+                    text.textContent = '⏳ Sincronizando...';
+                    break;
+                case 'error':
+                    syncStatus.style.background = 'rgba(255, 200, 100, 0.3)';
+                    icon.className = 'fas fa-exclamation-triangle';
+                    text.textContent = '⚠️ Error de conexión';
+                    break;
+                case 'offline':
+                    syncStatus.style.background = 'rgba(255, 220, 100, 0.3)';
+                    icon.className = 'fas fa-wifi-slash';
+                    text.textContent = '📴 Modo local';
+                    break;
+            }
+        }
+        
+        // ==============================================
+        // REINICIAR CONTADOR
+        // ==============================================
+        async function resetTimer() {
+            if (!confirm('¿Estás seguro de querer reiniciar el contador? Esto afectará a todos los dispositivos.')) {
+                return;
             }
             
-            // Cargar la fecha
-            loadStartDate();
+            const newStartDate = new Date();
+            newStartDate.setMonth(newStartDate.getMonth() - 1);
             
-            // Efectos de animación
-            const elements = document.querySelectorAll('.header, .message, .timer-container, .signature');
-            elements.forEach((el, index) => {
-                setTimeout(() => {
-                    el.style.opacity = '1';
-                    el.style.transform = 'translateY(0)';
-                }, index * 200);
-            });
+            console.log('🔄 Reiniciando contador a:', newStartDate.toLocaleString());
             
-            elements.forEach(el => {
-                el.style.opacity = '0';
-                el.style.transform = 'translateY(20px)';
-                el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-            });
+            // Guardar localmente
+            localStorage.setItem('amor_fecha_inicio', newStartDate.toISOString());
+            startDate = newStartDate;
             
-            const newBeginning = document.querySelector('.new-beginning');
-            setTimeout(() => {
-                newBeginning.classList.add('bloom');
-            }, 1000);
-        });
+            // Resetear mensajes mostrados
+            specialMessagesShown = [];
+            localStorage.removeItem('shownMessages');
+            
+            // Intentar guardar en JSONBin
+            if (isOnline) {
+                updateSyncStatus('syncing');
+                const saved = await saveDateToJsonBin(newStartDate);
+                
+                if (saved) {
+                    alert('✅ ¡Contador reiniciado en TODOS los dispositivos!');
+                    updateSyncStatus('connected');
+                    
+                    // Mostrar confeti
+                    launchConfetti();
+                    
+                    // Crear notas musicales
+                    for (let i = 0; i < 10; i++) {
+                        setTimeout(() => createFloatingMusicNote(), i * 100);
+                    }
+                    
+                    // Reproducir sonido
+                    if (soundEnabled) {
+                        playCelebrationSound();
+                    }
+                } else {
+                    alert('⚠️ ¡Contador reiniciado! (solo en este dispositivo por ahora)');
+                    updateSyncStatus('error');
+                }
+            } else {
+                alert('⚠️ ¡Contador reiniciado! (solo en este dispositivo - sin conexión)');
+                updateSyncStatus('offline');
+            }
+            
+            // Actualizar display
+            updateTimer();
+        }
     </script>
 </body>
 </html>

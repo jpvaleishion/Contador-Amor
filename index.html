@@ -240,27 +240,72 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
+            background-color: rgba(0, 0, 0, 0.95);
             z-index: 9999;
             justify-content: center;
             align-items: center;
             animation: fadeIn 0.3s ease-out;
+            padding: 20px;
+        }
+        
+        .modal-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
         }
         
         .modal-content {
-            max-width: 90%;
-            max-height: 90%;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-            animation: bloom 0.5s ease-out;
+            max-width: 100%;
+            max-height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             position: relative;
         }
         
         .modal-photo {
-            width: 100%;
-            height: auto;
-            display: block;
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 10px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+            animation: bloom 0.5s ease-out;
+        }
+        
+        /* Botones de navegación */
+        .modal-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 10000;
+        }
+        
+        .modal-nav:hover {
+            background: var(--color-amor);
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        .modal-prev {
+            left: 20px;
+        }
+        
+        .modal-next {
+            right: 20px;
         }
         
         .close-modal {
@@ -270,7 +315,7 @@
             font-size: 2.5rem;
             color: white;
             cursor: pointer;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.7);
             width: 50px;
             height: 50px;
             border-radius: 50%;
@@ -278,11 +323,25 @@
             justify-content: center;
             align-items: center;
             transition: all 0.3s;
+            z-index: 10000;
         }
         
         .close-modal:hover {
             background: var(--color-amor);
             transform: rotate(90deg);
+        }
+        
+        .photo-counter {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 1.2rem;
+            z-index: 10000;
         }
         
         /* ========== REPRODUCTOR SPOTIFY ========== */
@@ -836,6 +895,18 @@
                 padding: 10px;
                 font-size: 1rem;
             }
+            
+            .modal-nav {
+                width: 45px;
+                height: 45px;
+                font-size: 1.3rem;
+            }
+            
+            .close-modal {
+                width: 45px;
+                height: 45px;
+                font-size: 2rem;
+            }
         }
         
         @media (max-width: 576px) {
@@ -919,6 +990,34 @@
                 font-size: 1rem;
                 padding: 0 10px;
             }
+            
+            .modal-nav {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+            
+            .modal-prev {
+                left: 10px;
+            }
+            
+            .modal-next {
+                right: 10px;
+            }
+            
+            .close-modal {
+                top: 15px;
+                right: 15px;
+                width: 40px;
+                height: 40px;
+                font-size: 1.8rem;
+            }
+            
+            .photo-counter {
+                bottom: 20px;
+                font-size: 1rem;
+                padding: 8px 16px;
+            }
         }
         
         @media (max-width: 480px) {
@@ -957,12 +1056,39 @@
                 font-size: 0.9rem;
                 padding: 8px;
             }
+            
+            .photo-modal {
+                padding: 10px;
+            }
         }
         
         @media (max-width: 380px) {
             .photos-grid {
                 max-width: 280px;
                 gap: 6px;
+            }
+        }
+        
+        /* Estilos específicos para dispositivos móviles en orientación vertical */
+        @media (max-height: 700px) and (orientation: portrait) {
+            .modal-photo {
+                max-height: 80vh;
+            }
+            
+            .photo-counter {
+                bottom: 10px;
+            }
+        }
+        
+        /* Estilos específicos para dispositivos móviles en orientación horizontal */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .modal-photo {
+                max-height: 90vh;
+                max-width: 90vw;
+            }
+            
+            .photo-counter {
+                bottom: 10px;
             }
         }
     </style>
@@ -986,9 +1112,14 @@
     
     <!-- Modal para fotos ampliadas -->
     <div class="photo-modal" id="photoModal">
-        <div class="modal-content">
+        <div class="modal-container">
+            <button class="modal-nav modal-prev" id="prevPhoto">‹</button>
+            <button class="modal-nav modal-next" id="nextPhoto">›</button>
             <span class="close-modal" id="closeModal">&times;</span>
-            <img class="modal-photo" id="modalPhoto" src="" alt="Foto de amor">
+            <div class="modal-content">
+                <img class="modal-photo" id="modalPhoto" src="" alt="Foto de amor">
+            </div>
+            <div class="photo-counter" id="photoCounter">1 / 5</div>
         </div>
     </div>
     
@@ -1009,31 +1140,31 @@
             
             <div class="photos-grid">
                 <!-- Foto 1 -->
-                <div class="photo-item" data-photo="https://github.com/jpvaleishion/Contador-Amor/blob/main/images/amor1.jpeg?raw=true">
+                <div class="photo-item" data-index="0" data-photo="https://github.com/jpvaleishion/Contador-Amor/blob/main/images/amor1.jpeg?raw=true">
                     <img class="photo-img" src="https://github.com/jpvaleishion/Contador-Amor/blob/main/images/amor1.jpeg?raw=true" alt="Nuestro amor 1" loading="lazy">
                     <div class="photo-overlay">Recuerdo Especial #1</div>
                 </div>
                 
                 <!-- Foto 2 -->
-                <div class="photo-item" data-photo="https://github.com/jpvaleishion/Contador-Amor/blob/main/images/amor2.jpeg?raw=true">
+                <div class="photo-item" data-index="1" data-photo="https://github.com/jpvaleishion/Contador-Amor/blob/main/images/amor2.jpeg?raw=true">
                     <img class="photo-img" src="https://github.com/jpvaleishion/Contador-Amor/blob/main/images/amor2.jpeg?raw=true" alt="Nuestro amor 2" loading="lazy">
                     <div class="photo-overlay">Recuerdo Especial #2</div>
                 </div>
                 
                 <!-- Foto 3 (Centro, más grande) -->
-                <div class="photo-item" data-photo="https://github.com/jpvaleishion/Contador-Amor/blob/main/images/amor3.jpeg?raw=true">
+                <div class="photo-item" data-index="2" data-photo="https://github.com/jpvaleishion/Contador-Amor/blob/main/images/amor3.jpeg?raw=true">
                     <img class="photo-img" src="https://github.com/jpvaleishion/Contador-Amor/blob/main/images/amor3.jpeg?raw=true" alt="Nuestro amor 3" loading="lazy">
                     <div class="photo-overlay">Mi Favorita ❤️</div>
                 </div>
                 
                 <!-- Foto 4 -->
-                <div class="photo-item" data-photo="https://github.com/jpvaleishion/Contador-Amor/blob/main/images/amor4.jpeg?raw=true">
+                <div class="photo-item" data-index="3" data-photo="https://github.com/jpvaleishion/Contador-Amor/blob/main/images/amor4.jpeg?raw=true">
                     <img class="photo-img" src="https://github.com/jpvaleishion/Contador-Amor/blob/main/images/amor4.jpeg?raw=true" alt="Nuestro amor 4" loading="lazy">
                     <div class="photo-overlay">Recuerdo Especial #4</div>
                 </div>
                 
                 <!-- Foto 5 -->
-                <div class="photo-item" data-photo="https://github.com/jpvaleishion/Contador-Amor/blob/main/images/amor5.jpeg?raw=true">
+                <div class="photo-item" data-index="4" data-photo="https://github.com/jpvaleishion/Contador-Amor/blob/main/images/amor5.jpeg?raw=true">
                     <img class="photo-img" src="https://github.com/jpvaleishion/Contador-Amor/blob/main/images/amor5.jpeg?raw=true" alt="Nuestro amor 5" loading="lazy">
                     <div class="photo-overlay">Recuerdo Especial #5</div>
                 </div>
@@ -1150,6 +1281,8 @@
         let soundEnabled = false;
         let specialMessagesShown = [];
         let spotifyAutoPlay = false;
+        let currentPhotoIndex = 0;
+        const totalPhotos = 5;
         
         // ==============================================
         // INICIALIZACIÓN
@@ -1188,23 +1321,40 @@
             
             // Configurar Spotify
             setupSpotify();
+            
+            // Configurar eventos del teclado para navegación de fotos
+            setupKeyboardNavigation();
         });
         
         // ==============================================
-        // GALERÍA DE FOTOS
+        // GALERÍA DE FOTOS CON NAVEGACIÓN MEJORADA
         // ==============================================
         function setupPhotoGallery() {
             const photoItems = document.querySelectorAll('.photo-item');
             const modal = document.getElementById('photoModal');
             const modalPhoto = document.getElementById('modalPhoto');
             const closeModal = document.getElementById('closeModal');
+            const prevPhoto = document.getElementById('prevPhoto');
+            const nextPhoto = document.getElementById('nextPhoto');
+            const photoCounter = document.getElementById('photoCounter');
             
             // Añadir eventos a cada foto
             photoItems.forEach(item => {
                 item.addEventListener('click', function() {
                     const photoUrl = this.getAttribute('data-photo');
-                    modalPhoto.src = photoUrl;
+                    currentPhotoIndex = parseInt(this.getAttribute('data-index'));
+                    
+                    // Cargar la foto seleccionada
+                    loadPhotoInModal(photoUrl);
+                    
+                    // Actualizar contador
+                    updatePhotoCounter();
+                    
+                    // Mostrar modal
                     modal.style.display = 'flex';
+                    
+                    // Ajustar tamaño de la foto
+                    setTimeout(adjustPhotoSize, 100);
                     
                     // Reproducir sonido si está activado
                     if (soundEnabled) {
@@ -1213,8 +1363,21 @@
                 });
             });
             
+            // Navegación anterior
+            prevPhoto.addEventListener('click', function(e) {
+                e.stopPropagation();
+                navigatePhotos(-1);
+            });
+            
+            // Navegación siguiente
+            nextPhoto.addEventListener('click', function(e) {
+                e.stopPropagation();
+                navigatePhotos(1);
+            });
+            
             // Cerrar modal al hacer clic en la X
-            closeModal.addEventListener('click', function() {
+            closeModal.addEventListener('click', function(e) {
+                e.stopPropagation();
                 modal.style.display = 'none';
             });
             
@@ -1225,10 +1388,123 @@
                 }
             });
             
-            // Cerrar modal con tecla Escape
+            // Ajustar tamaño de la foto cuando cambia el tamaño de la ventana
+            window.addEventListener('resize', function() {
+                if (modal.style.display === 'flex') {
+                    adjustPhotoSize();
+                }
+            });
+        }
+        
+        function loadPhotoInModal(photoUrl) {
+            const modalPhoto = document.getElementById('modalPhoto');
+            
+            // Mostrar un indicador de carga
+            modalPhoto.style.opacity = '0.5';
+            
+            // Pre-cargar la imagen
+            const img = new Image();
+            img.onload = function() {
+                modalPhoto.src = photoUrl;
+                modalPhoto.style.opacity = '1';
+                adjustPhotoSize();
+            };
+            img.onerror = function() {
+                // Si hay error, mostrar imagen de respaldo
+                modalPhoto.src = photoUrl;
+                modalPhoto.style.opacity = '1';
+                adjustPhotoSize();
+                console.error('Error al cargar la imagen:', photoUrl);
+            };
+            img.src = photoUrl;
+        }
+        
+        function navigatePhotos(direction) {
+            // Calcular nuevo índice
+            currentPhotoIndex += direction;
+            
+            // Ajustar si se sale de los límites
+            if (currentPhotoIndex < 0) {
+                currentPhotoIndex = totalPhotos - 1;
+            } else if (currentPhotoIndex >= totalPhotos) {
+                currentPhotoIndex = 0;
+            }
+            
+            // Obtener nueva foto
+            const photoItems = document.querySelectorAll('.photo-item');
+            const newPhotoUrl = photoItems[currentPhotoIndex].getAttribute('data-photo');
+            
+            // Cargar nueva foto
+            loadPhotoInModal(newPhotoUrl);
+            
+            // Actualizar contador
+            updatePhotoCounter();
+            
+            // Reproducir sonido de navegación si está activado
+            if (soundEnabled) {
+                playNavigationSound();
+            }
+        }
+        
+        function updatePhotoCounter() {
+            const photoCounter = document.getElementById('photoCounter');
+            photoCounter.textContent = `${currentPhotoIndex + 1} / ${totalPhotos}`;
+        }
+        
+        function adjustPhotoSize() {
+            const modalPhoto = document.getElementById('modalPhoto');
+            const modalContainer = document.querySelector('.modal-container');
+            
+            if (!modalPhoto.complete || modalPhoto.naturalWidth === 0) {
+                // Si la imagen aún no se ha cargado, intentar de nuevo en 100ms
+                setTimeout(adjustPhotoSize, 100);
+                return;
+            }
+            
+            // Obtener dimensiones disponibles
+            const containerWidth = modalContainer.clientWidth - 40; // Restar padding
+            const containerHeight = modalContainer.clientHeight - 100; // Restar espacio para controles
+            
+            // Obtener dimensiones originales de la imagen
+            const imgWidth = modalPhoto.naturalWidth;
+            const imgHeight = modalPhoto.naturalHeight;
+            
+            // Calcular proporciones
+            const widthRatio = containerWidth / imgWidth;
+            const heightRatio = containerHeight / imgHeight;
+            
+            // Usar la proporción más pequeña para mantener la relación de aspecto
+            const scaleRatio = Math.min(widthRatio, heightRatio, 1); // No escalar más allá del 100%
+            
+            // Aplicar dimensiones
+            modalPhoto.style.width = `${imgWidth * scaleRatio}px`;
+            modalPhoto.style.height = `${imgHeight * scaleRatio}px`;
+            
+            // Asegurarse de que no exceda los límites
+            modalPhoto.style.maxWidth = '100%';
+            modalPhoto.style.maxHeight = '100%';
+            modalPhoto.style.objectFit = 'contain';
+        }
+        
+        function setupKeyboardNavigation() {
             document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape' && modal.style.display === 'flex') {
-                    modal.style.display = 'none';
+                const modal = document.getElementById('photoModal');
+                
+                // Solo responder si el modal está abierto
+                if (modal.style.display !== 'flex') return;
+                
+                switch(e.key) {
+                    case 'Escape':
+                        modal.style.display = 'none';
+                        break;
+                    case 'ArrowLeft':
+                        navigatePhotos(-1);
+                        e.preventDefault();
+                        break;
+                    case 'ArrowRight':
+                        navigatePhotos(1);
+                        e.preventDefault();
+                        break;
                 }
             });
         }
@@ -1252,6 +1528,31 @@
                 
                 oscillator.start(audioContext.currentTime);
                 oscillator.stop(audioContext.currentTime + 0.2);
+                
+            } catch (e) {
+                console.log('🔇 Sonidos no disponibles');
+            }
+        }
+        
+        function playNavigationSound() {
+            if (!soundEnabled) return;
+            
+            try {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                oscillator.frequency.value = 659.25; // Nota E
+                oscillator.type = 'sine';
+                
+                gainNode.gain.setValueAtTime(0.03, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+                
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + 0.1);
                 
             } catch (e) {
                 console.log('🔇 Sonidos no disponibles');
@@ -1438,15 +1739,6 @@
             // Efecto especial cada hora exacta
             if (minutes === 0 && seconds === 0) {
                 createPhotoSparkleEffect();
-            }
-            
-            // Cambiar ligeramente el brillo de las fotos cada 30 segundos
-            if (seconds % 30 === 0) {
-                const photoItems = document.querySelectorAll('.photo-item');
-                photoItems.forEach(item => {
-                    item.style.filter = `brightness(${0.9 + Math.random() * 0.2})`;
-                    item.style.transition = 'filter 1s ease';
-                });
             }
         }
         

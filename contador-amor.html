@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para el Amor de Mi Vida</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #ffafbd, #ffc3a0);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            position: relative;
+            padding: 40px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .header h1 {
+            color: #e63946;
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .header h1:after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(to right, transparent, #e63946, transparent);
+            bottom: -10px;
+            left: 0;
+        }
+        
+        .heart-icon {
+            color: #e63946;
+            font-size: 1.8rem;
+            margin: 0 10px;
+            animation: heartbeat 1.5s infinite;
+        }
+        
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        .message {
+            font-size: 1.4rem;
+            line-height: 1.8;
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 0 20px;
+            color: #555;
+        }
+        
+        .message p {
+            margin-bottom: 20px;
+        }
+        
+        .princess {
+            color: #e63946;
+            font-weight: bold;
+            font-style: italic;
+        }
+        
+        .new-beginning {
+            display: inline-block;
+            background-color: #f8f9fa;
+            border: 2px dashed #e63946;
+            border-radius: 10px;
+            padding: 8px 15px;
+            margin-top: 10px;
+            font-size: 1rem;
+            color: #e63946;
+            font-weight: 600;
+        }
+        
+        .timer-container {
+            background: linear-gradient(to right, #ff758c, #ff7eb3);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            color: white;
+            margin-top: 30px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .timer-title {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            font-weight: 600;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+        
+        .sync-status {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 8px 15px;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            justify-content: center;
+        }
+        
+        .timer {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .time-unit {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 20px 15px;
+            min-width: 110px;
+            backdrop-filter: blur(5px);
+        }
+        
+        .time-value {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .time-label {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+        }
+        
+        .highlight {
+            background-color: rgba(255, 255, 255, 0.3);
+            border: 2px solid white;
+            transform: scale(1.05);
+        }
+        
+        .signature {
+            text-align: right;
+            margin-top: 40px;
+            font-size: 1.5rem;
+            color: #e63946;
+            font-style: italic;
+            font-weight: 600;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 0.9rem;
+            color: #888;
+        }
+        
+        .heart-decoration {
+            position: absolute;
+            color: rgba(230, 57, 70, 0.1);
+            font-size: 2rem;
+            z-index: 0;
+        }
+        
+        .heart-1 { top: 10%; left: 5%; }
+        .heart-2 { top: 15%; right: 7%; }
+        .heart-3 { bottom: 20%; left: 8%; }
+        .heart-4 { bottom: 15%; right: 10%; }
+        
+        .bloom {
+            animation: bloom 2s ease-out;
+        }
+        
+        @keyframes bloom {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        .reset-btn {
+            background-color: rgba(255, 255, 255, 0.9);
+            color: #e63946;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 25px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+        
+        .reset-btn:hover {
+            background-color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 25px;
+            }
+            
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .message {
+                font-size: 1.2rem;
+                padding: 0;
+            }
+            
+            .timer {
+                gap: 10px;
+            }
+            
+            .time-unit {
+                min-width: 95px;
+                padding: 15px 10px;
+            }
+            
+            .time-value {
+                font-size: 2.2rem;
+                height: 40px;
+            }
+            
+            .highlight {
+                transform: scale(1.03);
+            }
+            
+            .timer-title {
+                font-size: 1.6rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .message {
+                font-size: 1.1rem;
+            }
+            
+            .time-unit {
+                min-width: 80px;
+                padding: 12px 8px;
+            }
+            
+            .time-value {
+                font-size: 1.8rem;
+                height: 35px;
+            }
+            
+            .timer-title {
+                font-size: 1.4rem;
+                margin-bottom: 20px;
+            }
+            
+            .new-beginning {
+                font-size: 0.9rem;
+                padding: 6px 10px;
+            }
+            
+            .time-label {
+                font-size: 0.9rem;
+                letter-spacing: 1px;
+            }
+            
+            .reset-btn {
+                padding: 10px 20px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="heart-decoration heart-1"><i class="fas fa-heart"></i></div>
+        <div class="heart-decoration heart-2"><i class="fas fa-heart"></i></div>
+        <div class="heart-decoration heart-3"><i class="fas fa-heart"></i></div>
+        <div class="heart-decoration heart-4"><i class="fas fa-heart"></i></div>
+        
+        <div class="header">
+            <h1>
+                <i class="fas fa-heart heart-icon"></i>
+                Para el Amor de Mi Vida
+                <i class="fas fa-heart heart-icon"></i>
+            </h1>
+        </div>
+        
+        <div class="message">
+            <p>Para el amor de mi vida, quiero que sepas, que todo este tiempo me la he pasado bien contigo, quiero que sigamos juntos hasta el último de nuestros días.</p>
+            <p>Mi vida a tu lado ha sido mejor, tú eres la mejor <span class="princess">mi princesa</span>.</p>
+            <div class="new-beginning bloom">
+                <i class="fas fa-seedling" style="margin-right: 8px;"></i>
+                Iniciando de nuevo
+            </div>
+        </div>
+        
+        <div class="timer-container">
+            <div class="timer-title">Llevamos juntos en este nuevo comienzo:</div>
+            
+            <div class="sync-status" id="syncStatus">
+                <i class="fas fa-sync-alt"></i>
+                <span>Conectando con JSONBin...</span>
+            </div>
+            
+            <div class="timer">
+                <div class="time-unit" id="years-unit">
+                    <div class="time-value" id="years">0</div>
+                    <div class="time-label">AÑO</div>
+                </div>
+                <div class="time-unit" id="months-unit">
+                    <div class="time-value" id="months">1</div>
+                    <div class="time-label">MESES</div>
+                </div>
+                <div class="time-unit">
+                    <div class="time-value" id="days">0</div>
+                    <div class="time-label">DÍAS</div>
+                </div>
+                <div class="time-unit">
+                    <div class="time-value" id="hours">00</div>
+                    <div class="time-label">HORAS</div>
+                </div>
+                <div class="time-unit">
+                    <div class="time-value" id="minutes">00</div>
+                    <div class="time-label">MINUTOS</div>
+                </div>
+                <div class="time-unit">
+                    <div class="time-value" id="seconds">00</div>
+                    <div class="time-label">SEGUNDOS</div>
+                </div>
+            </div>
+            
+            <button class="reset-btn" id="resetBtn">
+                <i class="fas fa-redo"></i>
+                Reiniciar contador
+            </button>
+        </div>
+        
+        <div class="signature">
+            — Te Amo <i class="fas fa-heart" style="color: #e63946; margin-left: 5px;"></i>
+        </div>
+        
+        <div class="footer">
+            Sincronizado con JSONBin.io | Funciona en todos los dispositivos
+        </div>
+    </div>
+
+    <script>
+        // ==============================================
+        // TUS CREDENCIALES JSONBIN.IO (¡YA CONFIGURADAS!)
+        // ==============================================
+        const JSONBIN_BIN_ID = '6989f89dae596e708f1dc562'; // Tu Bin ID
+        const JSONBIN_API_KEY = '$2a$10$ZOrmLvQsR5eQwxIKCh/1eenfsFCKIKpenMsNwEHdAzpUHZQBx8bSW'; // Tu API Key
+        // ==============================================
+        
+        // URLs para JSONBin
+        const JSONBIN_URL = `https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}`;
+        const JSONBIN_LATEST_URL = `https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}/latest`;
+        
+        let startDate = null;
+        let isOnline = true;
+        
+        // Función para actualizar estado de conexión
+        function updateSyncStatus(status) {
+            const syncStatus = document.getElementById('syncStatus');
+            const icon = syncStatus.querySelector('i');
+            const text = syncStatus.querySelector('span');
+            
+            if (status === 'connected') {
+                syncStatus.style.backgroundColor = 'rgba(144, 238, 144, 0.3)'; // Verde claro
+                icon.className = 'fas fa-cloud';
+                text.textContent = '✅ Sincronizado con JSONBin';
+            } else if (status === 'syncing') {
+                syncStatus.style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
+                icon.className = 'fas fa-sync-alt fa-spin';
+                text.textContent = '⏳ Sincronizando...';
+            } else if (status === 'error') {
+                syncStatus.style.backgroundColor = 'rgba(255, 200, 100, 0.3)';
+                icon.className = 'fas fa-exclamation-triangle';
+                text.textContent = '⚠️ Error de conexión - Modo local';
+            } else if (status === 'offline') {
+                syncStatus.style.backgroundColor = 'rgba(255, 220, 100, 0.3)';
+                icon.className = 'fas fa-wifi-slash';
+                text.textContent = '📴 Sin conexión - Modo local';
+            }
+        }
+        
+        // Función para obtener fecha desde JSONBin
+        async function getDateFromJsonBin() {
+            updateSyncStatus('syncing');
+            
+            try {
+                console.log('Obteniendo fecha de JSONBin...');
+                const response = await fetch(JSONBIN_LATEST_URL, {
+                    headers: {
+                        'X-Master-Key': JSONBIN_API_KEY
+                    }
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`Error HTTP: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                console.log('Datos recibidos de JSONBin:', data);
+                
+                if (data.record && data.record.startDate) {
+                    updateSyncStatus('connected');
+                    return new Date(data.record.startDate);
+                } else {
+                    throw new Error('No se encontró startDate en los datos');
+                }
+            } catch (error) {
+                console.error('Error al obtener fecha de JSONBin:', error);
+                updateSyncStatus('error');
+                return null;
+            }
+        }
+        
+        // Función para guardar fecha en JSONBin
+        async function saveDateToJsonBin(date) {
+            try {
+                console.log('Guardando fecha en JSONBin:', date);
+                const response = await fetch(JSONBIN_URL, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Master-Key': JSONBIN_API_KEY,
+                        'X-Bin-Versioning': 'false'
+                    },
+                    body: JSON.stringify({
+                        startDate: date.toISOString(),
+                        lastUpdated: new Date().toISOString(),
+                        message: "Contador de amor sincronizado"
+                    })
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`Error HTTP: ${response.status}`);
+                }
+                
+                const result = await response.json();
+                console.log('Fecha guardada exitosamente:', result);
+                return true;
+            } catch (error) {
+                console.error('Error al guardar fecha en JSONBin:', error);
+                return false;
+            }
+        }
+        
+        // Función para cargar la fecha inicial
+        async function loadStartDate() {
+            console.log('Cargando fecha inicial...');
+            
+            // Primero intentar desde JSONBin
+            const jsonBinDate = await getDateFromJsonBin();
+            
+            if (jsonBinDate) {
+                startDate = jsonBinDate;
+                console.log('✅ Fecha cargada desde JSONBin:', startDate);
+                console.log('Fecha en JSONBin:', startDate.toLocaleString());
+            } else {
+                console.log('❌ Falló JSONBin, intentando localStorage...');
+                
+                // Si falla JSONBin, intentar localStorage
+                const localDate = localStorage.getItem('amor_fecha_inicio');
+                
+                if (localDate) {
+                    startDate = new Date(localDate);
+                    console.log('✅ Fecha cargada desde localStorage:', startDate);
+                    updateSyncStatus('error');
+                } else {
+                    // Si no hay nada, crear nueva fecha (hace 1 mes)
+                    startDate = new Date();
+                    startDate.setMonth(startDate.getMonth() - 1);
+                    
+                    console.log('🆕 Nueva fecha creada (hace 1 mes):', startDate);
+                    
+                    // Guardar en localStorage como respaldo
+                    localStorage.setItem('amor_fecha_inicio', startDate.toISOString());
+                    updateSyncStatus('error');
+                    
+                    // Intentar guardar en JSONBin
+                    console.log('Intentando guardar nueva fecha en JSONBin...');
+                    const saved = await saveDateToJsonBin(startDate);
+                    if (saved) {
+                        updateSyncStatus('connected');
+                        console.log('✅ Nueva fecha guardada en JSONBin');
+                    } else {
+                        console.log('❌ No se pudo guardar en JSONBin');
+                    }
+                }
+            }
+            
+            // Iniciar el contador
+            updateTimer();
+            setInterval(updateTimer, 1000);
+            
+            // Sincronizar cada 30 segundos
+            setInterval(syncWithJsonBin, 30000);
+        }
+        
+        // Función para sincronizar con JSONBin
+        async function syncWithJsonBin() {
+            if (!isOnline) {
+                console.log('📴 Modo offline, no sincronizando');
+                return;
+            }
+            
+            try {
+                console.log('🔄 Sincronizando con JSONBin...');
+                const jsonBinDate = await getDateFromJsonBin();
+                if (jsonBinDate && startDate && jsonBinDate.getTime() !== startDate.getTime()) {
+                    startDate = jsonBinDate;
+                    localStorage.setItem('amor_fecha_inicio', startDate.toISOString());
+                    console.log('✅ Fecha sincronizada desde JSONBin:', startDate);
+                    updateSyncStatus('connected');
+                }
+            } catch (error) {
+                console.log('❌ Error en sincronización:', error);
+            }
+        }
+        
+        // Función para actualizar el contador
+        function updateTimer() {
+            if (!startDate) return;
+            
+            const now = new Date();
+            const diff = now - startDate;
+            
+            const seconds = Math.floor(diff / 1000) % 60;
+            const minutes = Math.floor(diff / (1000 * 60)) % 60;
+            const hours = Math.floor(diff / (1000 * 60 * 60)) % 24;
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            
+            const years = Math.floor(days / 365);
+            const remainingDaysAfterYears = days % 365;
+            const months = Math.floor(remainingDaysAfterYears / 30);
+            const remainingDays = remainingDaysAfterYears % 30;
+            
+            document.getElementById('years').textContent = years;
+            document.getElementById('months').textContent = months;
+            document.getElementById('days').textContent = remainingDays;
+            document.getElementById('hours').textContent = hours < 10 ? '0' + hours : hours;
+            document.getElementById('minutes').textContent = minutes < 10 ? '0' + minutes : minutes;
+            document.getElementById('seconds').textContent = seconds < 10 ? '0' + seconds : seconds;
+            
+            const yearsUnit = document.getElementById('years-unit');
+            if (years === 0) {
+                yearsUnit.classList.add('highlight');
+            } else {
+                yearsUnit.classList.remove('highlight');
+            }
+            
+            const monthsUnit = document.getElementById('months-unit');
+            if (months === 1 && remainingDays === 0) {
+                monthsUnit.classList.add('highlight');
+            } else {
+                monthsUnit.classList.remove('highlight');
+            }
+        }
+        
+        // Función para reiniciar el contador
+        async function resetTimer() {
+            if (confirm('¿Estás seguro de querer reiniciar el contador? Esto afectará a todos los dispositivos.')) {
+                const newStartDate = new Date();
+                newStartDate.setMonth(newStartDate.getMonth() - 1);
+                
+                console.log('🔄 Reiniciando contador a:', newStartDate);
+                
+                // Guardar en localStorage primero
+                localStorage.setItem('amor_fecha_inicio', newStartDate.toISOString());
+                
+                // Intentar guardar en JSONBin
+                if (isOnline) {
+                    console.log('Intentando guardar reinicio en JSONBin...');
+                    const saved = await saveDateToJsonBin(newStartDate);
+                    if (saved) {
+                        startDate = newStartDate;
+                        updateTimer();
+                        alert('✅ ¡Contador reiniciado en TODOS los dispositivos!');
+                        console.log('✅ Reinicio exitoso en JSONBin');
+                        return;
+                    }
+                }
+                
+                // Si JSONBin falla, solo actualizar localmente
+                startDate = newStartDate;
+                updateTimer();
+                alert('⚠️ ¡Contador reiniciado! (solo en este dispositivo por ahora)');
+                console.log('⚠️ Reinicio solo local (JSONBin falló)');
+            }
+        }
+        
+        // Configurar eventos
+        document.getElementById('resetBtn').addEventListener('click', resetTimer);
+        
+        // Detectar cambios en conexión
+        window.addEventListener('online', () => {
+            isOnline = true;
+            console.log('🌐 Conexión restaurada');
+            updateSyncStatus('connected');
+            syncWithJsonBin();
+        });
+        
+        window.addEventListener('offline', () => {
+            isOnline = false;
+            console.log('📴 Sin conexión');
+            updateSyncStatus('offline');
+        });
+        
+        // Inicializar cuando cargue la página
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🚀 Página cargada, iniciando contador...');
+            
+            // Verificar credenciales
+            if (!JSONBIN_BIN_ID || !JSONBIN_API_KEY || 
+                JSONBIN_BIN_ID.includes('PEGA_TU') || 
+                JSONBIN_API_KEY.includes('PEGA_TU')) {
+                alert('⚠️ Configura primero tus credenciales JSONBin en el código');
+                updateSyncStatus('error');
+            }
+            
+            // Cargar la fecha
+            loadStartDate();
+            
+            // Efectos de animación
+            const elements = document.querySelectorAll('.header, .message, .timer-container, .signature');
+            elements.forEach((el, index) => {
+                setTimeout(() => {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }, index * 200);
+            });
+            
+            elements.forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            });
+            
+            const newBeginning = document.querySelector('.new-beginning');
+            setTimeout(() => {
+                newBeginning.classList.add('bloom');
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

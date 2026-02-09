@@ -97,6 +97,16 @@
             50% { transform: translateY(-15px) rotate(10deg); opacity: 1; }
         }
         
+        @keyframes photoGlow {
+            0%, 100% { box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); }
+            50% { box-shadow: 0 8px 25px rgba(230, 57, 70, 0.3); }
+        }
+        
+        @keyframes growPhotos {
+            0% { transform: scale(0.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
         /* ========== CONTENEDOR PRINCIPAL ========== */
         .container {
             max-width: 900px;
@@ -110,6 +120,169 @@
             animation: bloom 1.2s ease-out;
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        /* ========== GALERÍA DE FOTOS ========== */
+        .photos-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 30px 0 50px;
+            position: relative;
+            animation: slideIn 1s ease-out 0.5s both;
+        }
+        
+        .photos-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            color: var(--color-amor);
+            margin-bottom: 40px;
+            text-align: center;
+            position: relative;
+            animation: glow 3s infinite alternate;
+        }
+        
+        .photos-title:after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(to right, transparent, var(--color-amor), transparent);
+            bottom: -15px;
+            left: 0;
+            border-radius: 2px;
+        }
+        
+        .photos-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 20px;
+            animation: growPhotos 1.5s ease-out;
+        }
+        
+        /* Ajuste para 5 fotos - la del medio más grande */
+        .photo-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            aspect-ratio: 1/1;
+            animation: photoGlow 4s infinite ease-in-out;
+        }
+        
+        .photo-item:hover {
+            transform: scale(1.08);
+            z-index: 10;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+            animation: none;
+        }
+        
+        .photo-item:nth-child(3) {
+            grid-column: span 1;
+            transform: scale(1.1);
+            z-index: 5;
+        }
+        
+        .photo-item:nth-child(3):hover {
+            transform: scale(1.18);
+        }
+        
+        .photo-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .photo-item:hover .photo-img {
+            transform: scale(1.1);
+        }
+        
+        .photo-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            color: white;
+            padding: 15px;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+            text-align: center;
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.2rem;
+        }
+        
+        .photo-item:hover .photo-overlay {
+            transform: translateY(0);
+        }
+        
+        .photos-caption {
+            text-align: center;
+            font-style: italic;
+            color: #666;
+            margin-top: 15px;
+            font-size: 1.1rem;
+            max-width: 600px;
+            line-height: 1.6;
+        }
+        
+        /* ========== MODAL PARA FOTOS AMPLIADAS ========== */
+        .photo-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease-out;
+        }
+        
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            animation: bloom 0.5s ease-out;
+            position: relative;
+        }
+        
+        .modal-photo {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 2.5rem;
+            color: white;
+            cursor: pointer;
+            background: rgba(0, 0, 0, 0.5);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s;
+        }
+        
+        .close-modal:hover {
+            background: var(--color-amor);
+            transform: rotate(90deg);
         }
         
         /* ========== REPRODUCTOR SPOTIFY ========== */
@@ -568,6 +741,15 @@
             .time-value {
                 font-size: 2.8rem;
             }
+            
+            .photos-title {
+                font-size: 2.2rem;
+            }
+            
+            .photos-grid {
+                max-width: 500px;
+                gap: 12px;
+            }
         }
         
         @media (max-width: 768px) {
@@ -639,6 +821,21 @@
                 width: 45px;
                 height: 45px;
             }
+            
+            .photos-title {
+                font-size: 2rem;
+                margin-bottom: 30px;
+            }
+            
+            .photos-grid {
+                max-width: 450px;
+                gap: 10px;
+            }
+            
+            .photo-overlay {
+                padding: 10px;
+                font-size: 1rem;
+            }
         }
         
         @media (max-width: 576px) {
@@ -697,6 +894,31 @@
                 height: 40px;
                 font-size: 1.1rem;
             }
+            
+            .photos-title {
+                font-size: 1.8rem;
+                margin-bottom: 25px;
+            }
+            
+            .photos-grid {
+                grid-template-columns: repeat(2, 1fr);
+                max-width: 350px;
+                gap: 10px;
+            }
+            
+            .photo-item:nth-child(3) {
+                grid-column: span 2;
+                transform: scale(1.05);
+            }
+            
+            .photo-item:nth-child(3):hover {
+                transform: scale(1.13);
+            }
+            
+            .photos-caption {
+                font-size: 1rem;
+                padding: 0 10px;
+            }
         }
         
         @media (max-width: 480px) {
@@ -720,6 +942,28 @@
             .spotify-iframe {
                 height: 152px;
             }
+            
+            .photos-title {
+                font-size: 1.6rem;
+                margin-bottom: 20px;
+            }
+            
+            .photos-grid {
+                max-width: 300px;
+                gap: 8px;
+            }
+            
+            .photo-overlay {
+                font-size: 0.9rem;
+                padding: 8px;
+            }
+        }
+        
+        @media (max-width: 380px) {
+            .photos-grid {
+                max-width: 280px;
+                gap: 6px;
+            }
         }
     </style>
 </head>
@@ -740,6 +984,14 @@
     <div class="floating-heart heart-3"><i class="fas fa-heart"></i></div>
     <div class="floating-heart heart-4"><i class="fas fa-heart"></i></div>
     
+    <!-- Modal para fotos ampliadas -->
+    <div class="photo-modal" id="photoModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeModal">&times;</span>
+            <img class="modal-photo" id="modalPhoto" src="" alt="Foto de amor">
+        </div>
+    </div>
+    
     <!-- Contenedor principal -->
     <div class="container">
         <!-- Encabezado -->
@@ -749,6 +1001,47 @@
                 Para el Amor de Mi Vida
                 <i class="fas fa-heart heart-icon"></i>
             </h1>
+        </div>
+        
+        <!-- Galería de Fotos -->
+        <div class="photos-container">
+            <div class="photos-title">Nuestros Momentos Especiales</div>
+            
+            <div class="photos-grid">
+                <!-- Foto 1 -->
+                <div class="photo-item" data-photo="https://github.com/jpvaleishion/Contador-Amor/blob/main/images/amor1.jpeg?raw=true">
+                    <img class="photo-img" src="https://github.com/jpvaleishion/Contador-Amor/blob/main/images/amor1.jpeg?raw=true" alt="Nuestro amor 1" loading="lazy">
+                    <div class="photo-overlay">Recuerdo Especial #1</div>
+                </div>
+                
+                <!-- Foto 2 -->
+                <div class="photo-item" data-photo="https://github.com/jpvaleishion/Contador-Amor/blob/main/images/amor2.jpeg?raw=true">
+                    <img class="photo-img" src="https://github.com/jpvaleishion/Contador-Amor/blob/main/images/amor2.jpeg?raw=true" alt="Nuestro amor 2" loading="lazy">
+                    <div class="photo-overlay">Recuerdo Especial #2</div>
+                </div>
+                
+                <!-- Foto 3 (Centro, más grande) -->
+                <div class="photo-item" data-photo="https://github.com/jpvaleishion/Contador-Amor/blob/main/images/amor3.jpeg?raw=true">
+                    <img class="photo-img" src="https://github.com/jpvaleishion/Contador-Amor/blob/main/images/amor3.jpeg?raw=true" alt="Nuestro amor 3" loading="lazy">
+                    <div class="photo-overlay">Mi Favorita ❤️</div>
+                </div>
+                
+                <!-- Foto 4 -->
+                <div class="photo-item" data-photo="https://github.com/jpvaleishion/Contador-Amor/blob/main/images/amor4.jpeg?raw=true">
+                    <img class="photo-img" src="https://github.com/jpvaleishion/Contador-Amor/blob/main/images/amor4.jpeg?raw=true" alt="Nuestro amor 4" loading="lazy">
+                    <div class="photo-overlay">Recuerdo Especial #4</div>
+                </div>
+                
+                <!-- Foto 5 -->
+                <div class="photo-item" data-photo="https://github.com/jpvaleishion/Contador-Amor/blob/main/images/amor5.jpeg?raw=true">
+                    <img class="photo-img" src="https://github.com/jpvaleishion/Contador-Amor/blob/main/images/amor5.jpeg?raw=true" alt="Nuestro amor 5" loading="lazy">
+                    <div class="photo-overlay">Recuerdo Especial #5</div>
+                </div>
+            </div>
+            
+            <div class="photos-caption">
+                Cada foto captura un momento especial de nuestro amor. Haz clic en cualquier foto para verla en grande.
+            </div>
         </div>
         
         <!-- Reproductor de Spotify -->
@@ -877,6 +1170,9 @@
             updateBackgroundByTime();
             setInterval(updateBackgroundByTime, 600000); // Cada 10 minutos
             
+            // Configurar funcionalidad de fotos
+            setupPhotoGallery();
+            
             // Cargar fecha inicial
             loadStartDate();
             
@@ -893,6 +1189,74 @@
             // Configurar Spotify
             setupSpotify();
         });
+        
+        // ==============================================
+        // GALERÍA DE FOTOS
+        // ==============================================
+        function setupPhotoGallery() {
+            const photoItems = document.querySelectorAll('.photo-item');
+            const modal = document.getElementById('photoModal');
+            const modalPhoto = document.getElementById('modalPhoto');
+            const closeModal = document.getElementById('closeModal');
+            
+            // Añadir eventos a cada foto
+            photoItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const photoUrl = this.getAttribute('data-photo');
+                    modalPhoto.src = photoUrl;
+                    modal.style.display = 'flex';
+                    
+                    // Reproducir sonido si está activado
+                    if (soundEnabled) {
+                        playPhotoClickSound();
+                    }
+                });
+            });
+            
+            // Cerrar modal al hacer clic en la X
+            closeModal.addEventListener('click', function() {
+                modal.style.display = 'none';
+            });
+            
+            // Cerrar modal al hacer clic fuera de la imagen
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+            
+            // Cerrar modal con tecla Escape
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && modal.style.display === 'flex') {
+                    modal.style.display = 'none';
+                }
+            });
+        }
+        
+        function playPhotoClickSound() {
+            if (!soundEnabled) return;
+            
+            try {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                oscillator.frequency.value = 523.25; // Nota C
+                oscillator.type = 'sine';
+                
+                gainNode.gain.setValueAtTime(0.05, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.2);
+                
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + 0.2);
+                
+            } catch (e) {
+                console.log('🔇 Sonidos no disponibles');
+            }
+        }
         
         // ==============================================
         // SPOTIFY INTEGRATION
@@ -1062,6 +1426,55 @@
             
             // Efectos musicales especiales
             checkMusicEffects(days, hours, minutes, seconds);
+            
+            // Efectos en las fotos
+            updatePhotoEffects(days, hours, minutes, seconds);
+        }
+        
+        // ==============================================
+        // EFECTOS EN LAS FOTOS
+        // ==============================================
+        function updatePhotoEffects(days, hours, minutes, seconds) {
+            // Efecto especial cada hora exacta
+            if (minutes === 0 && seconds === 0) {
+                createPhotoSparkleEffect();
+            }
+            
+            // Cambiar ligeramente el brillo de las fotos cada 30 segundos
+            if (seconds % 30 === 0) {
+                const photoItems = document.querySelectorAll('.photo-item');
+                photoItems.forEach(item => {
+                    item.style.filter = `brightness(${0.9 + Math.random() * 0.2})`;
+                    item.style.transition = 'filter 1s ease';
+                });
+            }
+        }
+        
+        function createPhotoSparkleEffect() {
+            // Crear chispas alrededor de las fotos
+            const photosContainer = document.querySelector('.photos-grid');
+            const photosRect = photosContainer.getBoundingClientRect();
+            
+            for (let i = 0; i < 10; i++) {
+                setTimeout(() => {
+                    const sparkle = document.createElement('div');
+                    sparkle.className = 'sparkle';
+                    sparkle.style.position = 'absolute';
+                    sparkle.style.left = (Math.random() * photosRect.width) + 'px';
+                    sparkle.style.top = (Math.random() * photosRect.height) + 'px';
+                    sparkle.style.width = '12px';
+                    sparkle.style.height = '12px';
+                    sparkle.style.animation = 'sparkle 1.5s ease-out forwards';
+                    
+                    photosContainer.appendChild(sparkle);
+                    
+                    setTimeout(() => {
+                        if (sparkle.parentNode) {
+                            sparkle.parentNode.removeChild(sparkle);
+                        }
+                    }, 1500);
+                }, i * 100);
+            }
         }
         
         // ==============================================
@@ -1304,7 +1717,7 @@
         
         function startAnimations() {
             // Animación inicial de entrada
-            const elements = document.querySelectorAll('.header, .music-player, .message, .timer-container, .signature');
+            const elements = document.querySelectorAll('.header, .photos-container, .music-player, .message, .timer-container, .signature');
             elements.forEach((el, index) => {
                 el.style.animationDelay = (index * 0.2) + 's';
             });
